@@ -161,9 +161,55 @@ public class Curso {
 
 	
 
-	public void eliminarEstudiantes(String nombre) {
+	public boolean eliminarEstudiantes(String nombre) {
 		
+		Estudiante actual;
+		boolean encontrado = false;
+		actual = ultimoEstudiante;
 		
+		if(primerEstudiante != null){
+		while(actual.siguiente != ultimoEstudiante && !encontrado) {
+			
+			encontrado=(actual.siguiente.nombre==nombre);
+			if(!encontrado) {
+				actual = actual.siguiente;
+				
+				System.out.println("1");
+				
+			}
+			
+		}
+		
+		System.out.println("2");
+		System.out.println(encontrado);
+		encontrado=(actual.siguiente.nombre==nombre);
+		System.out.println(encontrado);
+		
+		if(encontrado){
+			
+			System.out.println("3");
+			Estudiante aux = actual.siguiente;
+			if(ultimoEstudiante == ultimoEstudiante.siguiente) {
+				
+				ultimoEstudiante=null; 
+				System.out.println("4");
+				
+			} else {
+				
+				if(aux == ultimoEstudiante) {
+					ultimoEstudiante=actual;
+					System.out.println("5");
+				}
+				actual.siguiente=aux.siguiente;
+				System.out.println("6");
+			}
+			
+			System.out.println("7");
+			aux=null; 
+		}
+	} 
+		
+		return encontrado==true;
 	}
 	
 	public String pintarEstudiante() {

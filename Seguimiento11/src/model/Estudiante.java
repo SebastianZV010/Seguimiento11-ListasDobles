@@ -11,7 +11,7 @@ public class Estudiante {
 	 * @param codigo
 	 * @param nombre
 	 */
-	public Estudiante(String nombre, String codigo) {
+	public Estudiante(String codigo, String nombre) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 	}
