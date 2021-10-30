@@ -11,7 +11,7 @@ public class Estudiante {
 	 * @param codigo
 	 * @param nombre
 	 */
-	public Estudiante(String codigo, String nombre) {
+	public Estudiante(String nombre, String codigo) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 	}
@@ -65,17 +65,14 @@ public class Estudiante {
 	}
 	@Override
 	public String toString() {
+	
 		
-		String n = "";
-		
-		return n;
-	} 
-	
-	
-	
-	
-	
-	
+		return  anterior.getNombre() + " <-- " + " Nombre: " + nombre
+				+ " --> " + siguiente.getNombre()
+				+ " / " + anterior.getCodigo() + " <-- " + " Codigo: " + codigo
+				+ " --> " + siguiente.getCodigo() + "\n";
+				
+	} 	
 	
 
 }

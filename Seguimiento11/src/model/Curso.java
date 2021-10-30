@@ -6,6 +6,7 @@ public class Curso {
 	int numEstudiante;
 	Estudiante primerEstudiante;
 	Estudiante ultimoEstudiante; 
+	int totalEstudiantes;
 	
 	
 	/**
@@ -81,8 +82,27 @@ public class Curso {
 	public void setUltimoEstudiante(Estudiante ultimoEstudiante) {
 		this.ultimoEstudiante = ultimoEstudiante;
 	}
+	
+	/**
+	 * @return the totalEstudiantes
+	 */
+	public int getTotalEstudiantes() {
+		return totalEstudiantes;
+	}
 
-	public void addEstudiante(Estudiante nuevoEstudiante) {
+
+	/**
+	 * @param totalEstudiantes the totalEstudiantes to set
+	 */
+	public void setTotalEstudiantes(int totalEstudiantes) {
+		this.totalEstudiantes = totalEstudiantes;
+	}
+
+
+	public String addEstudiante(Estudiante nuevoEstudiante) {
+		
+		totalEstudiantes++;
+		String mensaje = "Estudiante agregado \n";
 		
 		if(primerEstudiante==null){
 			
@@ -99,20 +119,81 @@ public class Curso {
 			ultimoEstudiante.setSiguiente(nuevoEstudiante);
 			primerEstudiante=nuevoEstudiante;
 		}
+		return mensaje;
 		
 	}	
 	
-	public void addEstudianteOrdenamiento(Estudiante nuevoEstudiante){
+	public String addEstudianteOrdenamiento(Estudiante nuevoEstudiante){
 		
+		String mensaje = "Estudiante agregado \n";
+		totalEstudiantes++;
 		
+		if(primerEstudiante==null){
+
+			primerEstudiante=nuevoEstudiante;
+			ultimoEstudiante=primerEstudiante;
+			primerEstudiante.setSiguiente(ultimoEstudiante);
+			ultimoEstudiante.setAnterior(primerEstudiante);
+
+		} else if(primerEstudiante == ultimoEstudiante) {
+			
+			primerEstudiante.setSiguiente(nuevoEstudiante);
+			nuevoEstudiante.setAnterior(primerEstudiante);
+			ultimoEstudiante=nuevoEstudiante;
+			ultimoEstudiante.setSiguiente(primerEstudiante);
+			primerEstudiante.setAnterior(ultimoEstudiante);
+			
+			
+		} else {
+			
+			ultimoEstudiante.setSiguiente(nuevoEstudiante);
+			nuevoEstudiante.setAnterior(ultimoEstudiante);
+			ultimoEstudiante=nuevoEstudiante;
+			ultimoEstudiante.setSiguiente(primerEstudiante);
+			primerEstudiante.setAnterior(ultimoEstudiante);
+			
+			
+		}
+		
+		return mensaje; 
+	
 	}
+
+	
 
 	public void eliminarEstudiantes(String nombre) {
 		
 		
 	}
 	
-	public void pintarEstudiante() {
+	public String pintarEstudiante() {
+		
+		
+		String codigo = "";
+		String mensaje = "";
+		
+		
+		if(primerEstudiante != null){
+			
+			Estudiante temporal = primerEstudiante; 
+			
+			while(!codigo.equalsIgnoreCase(ultimoEstudiante.getCodigo())) {
+				
+				mensaje += temporal.toString();
+				temporal = temporal.getSiguiente();
+				codigo = temporal.getCodigo();
+				
+			}
+			
+			mensaje += temporal.toString();
+			
+		} else {
+			
+			mensaje = "\n There are no students registered \n";
+			
+		}
+		
+		return mensaje; 
 		
 	}
 	
