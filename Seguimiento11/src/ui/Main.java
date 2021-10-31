@@ -76,7 +76,7 @@ public class Main {
 				break;
 				
 			case 4:
-				borrarElemento();
+				borrarElementoC();
 				menu();
 				break;
 				
@@ -141,11 +141,22 @@ public class Main {
 		//curso.eliminarEstudiantes(nombre);
 	}
 	
+	public void borrarElementoC() {
+		
+		
+		
+		System.out.println("Ingrese el nombre del estudiante que quiera eliminar");
+		String nombre = sc.nextLine();
+		
+		System.out.println(curso.borrarEstudianteNuevaForm(nombre));
+	}
+	
 	public void prueba() {
 		
 		Estudiante e1 = new Estudiante("1","Sebastian");
-		Estudiante e2 = new Estudiante("2","Kremer");
-		Estudiante e3 = new Estudiante("3","GarbanzoFurioso");
+		Estudiante e3 = new Estudiante("2","GarbanzoFurioso");
+		Estudiante e2 = new Estudiante("3","Kremer");
+		Estudiante e4 = new Estudiante("4","GarbanzoFurioso");
 		
 //		curso.addEstudiante(e1);
 //		curso.addEstudiante(e2);
@@ -154,6 +165,7 @@ public class Main {
 		curso.addEstudianteOrdenamiento(e1);
 		curso.addEstudianteOrdenamiento(e2);
 		curso.addEstudianteOrdenamiento(e3);
+		curso.addEstudianteOrdenamiento(e4);
 
 		System.out.println(curso.pintarEstudiante());
 		

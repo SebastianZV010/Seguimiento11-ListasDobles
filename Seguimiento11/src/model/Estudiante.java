@@ -4,7 +4,7 @@ public class Estudiante {
 
 	private String codigo;
 	private String nombre;
-	private 	Estudiante siguiente;
+	private Estudiante siguiente;
 	private Estudiante anterior;
 
 	/**
