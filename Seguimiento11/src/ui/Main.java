@@ -133,7 +133,7 @@ public class Main {
 		
 		System.out.println(eliminado);
 		
-		if(eliminado == false){
+		if(eliminado == true){
 			System.out.println("Se ha eliminado el estudiante: " + nombre);
 		} else {
 			System.out.println("El estudiante " + nombre + " no se hace parte del curso");

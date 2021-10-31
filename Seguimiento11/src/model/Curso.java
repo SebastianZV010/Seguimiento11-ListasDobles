@@ -2,11 +2,11 @@ package model;
 
 public class Curso {
 
-	String nombre;
-	int numEstudiante;
-	Estudiante primerEstudiante;
-	Estudiante ultimoEstudiante; 
-	int totalEstudiantes;
+	private String nombre;
+	private int numEstudiante;
+	private Estudiante primerEstudiante;
+	private Estudiante ultimoEstudiante; 
+	private int totalEstudiantes;
 	
 	
 	/**
@@ -168,11 +168,12 @@ public class Curso {
 		actual = ultimoEstudiante;
 		
 		if(primerEstudiante != null){
-		while(actual.siguiente != ultimoEstudiante && !encontrado) {
+		while(actual.getSiguiente() != ultimoEstudiante && !encontrado) {
 			
-			encontrado=(actual.siguiente.nombre==nombre);
+			encontrado=(actual.getSiguiente().getNombre().equals(nombre));
+			System.out.println(encontrado);
 			if(!encontrado) {
-				actual = actual.siguiente;
+				actual = actual.getSiguiente();
 				
 				System.out.println("1");
 				
@@ -182,14 +183,14 @@ public class Curso {
 		
 		System.out.println("2");
 		System.out.println(encontrado);
-		encontrado=(actual.siguiente.nombre==nombre);
+		encontrado=(actual.getSiguiente().getNombre().equals(nombre));
 		System.out.println(encontrado);
 		
 		if(encontrado){
 			
 			System.out.println("3");
-			Estudiante aux = actual.siguiente;
-			if(ultimoEstudiante == ultimoEstudiante.siguiente) {
+			Estudiante aux = actual.getSiguiente();
+			if(ultimoEstudiante == ultimoEstudiante.getSiguiente()) {
 				
 				ultimoEstudiante=null; 
 				System.out.println("4");
@@ -200,7 +201,7 @@ public class Curso {
 					ultimoEstudiante=actual;
 					System.out.println("5");
 				}
-				actual.siguiente=aux.siguiente;
+				actual.setSiguiente(aux.getSiguiente());
 				System.out.println("6");
 			}
 			
@@ -212,6 +213,58 @@ public class Curso {
 		return encontrado==true;
 	}
 	
+	public boolean eliminarEstudiantesCopy(String nombre) {
+		
+		Estudiante actual;
+		boolean encontrado = false;
+		actual = primerEstudiante;
+		
+		if(primerEstudiante != null && ultimoEstudiante != null){
+			while(actual.getSiguiente() != ultimoEstudiante && !encontrado) {
+				
+				encontrado=(actual.getSiguiente().getNombre().equals(nombre));
+				System.out.println(encontrado);
+				if(!encontrado) {
+					actual = actual.getSiguiente();
+					
+					System.out.println("1");
+					
+				}
+				
+			}
+			
+			System.out.println("2");
+			System.out.println(encontrado);
+			encontrado=(actual.getSiguiente().getNombre().equals(nombre));
+			System.out.println(encontrado);
+			
+			if(encontrado){
+				
+				System.out.println("3");
+				Estudiante aux = actual.getSiguiente();
+				if(ultimoEstudiante == ultimoEstudiante.getSiguiente()) {
+					
+					ultimoEstudiante=null; 
+					System.out.println("4");
+					
+				} else {
+					
+					if(aux == ultimoEstudiante) {
+						ultimoEstudiante=actual;
+						System.out.println("5");
+					}
+					actual.setSiguiente(aux.getSiguiente());
+					System.out.println("6");
+				}
+				
+				System.out.println("7");
+				aux=null; 
+			}
+		} 
+		
+		return encontrado==true;
+	}
+	
 	public String pintarEstudiante() {
 		
 		
@@ -219,10 +272,10 @@ public class Curso {
 		String mensaje = "";
 		
 		
-		if(primerEstudiante != null){
+		if(primerEstudiante != null && ultimoEstudiante != null){
 			
 			Estudiante temporal = primerEstudiante; 
-			
+		
 			while(!codigo.equalsIgnoreCase(ultimoEstudiante.getCodigo())) {
 				
 				mensaje += temporal.toString();

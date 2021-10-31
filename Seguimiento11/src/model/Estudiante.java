@@ -2,11 +2,11 @@ package model;
 
 public class Estudiante {
 
-	String codigo;
-	String nombre;
-	Estudiante siguiente;
-	Estudiante anterior;
-	
+	private String codigo;
+	private String nombre;
+	private 	Estudiante siguiente;
+	private Estudiante anterior;
+
 	/**
 	 * @param codigo
 	 * @param nombre
