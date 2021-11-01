@@ -65,13 +65,42 @@ public class Estudiante {
 	}
 	@Override
 	public String toString() {
+		
+		String message = "";
+		
+		if(anterior != null && siguiente != null) {
+			
+			message =  anterior.getNombre() + " <-- " + " Nombre: " + nombre+ " --> " + siguiente.getNombre()
+			+ " / " + anterior.getCodigo() + " <-- " + " Codigo: " + codigo
+			+ " --> " + siguiente.getCodigo() + "\n";
+			
+		}
+		else if(anterior == null && siguiente == null ) {
+			
+			message =  "__" + " <-- " + " Nombre: " + nombre+ " --> " + "__"
+			+ " / " + "__" + " <-- " + " Codigo: " + codigo
+			+ " --> " + "__" + "\n";
+		}
+		else if(anterior == null) {
+			
+			message =   "__" + " <-- " + " Nombre: " + nombre+ " --> " + siguiente.getNombre()
+			+ " / " + "__" + " <-- " + " Codigo: " + codigo
+			+ " --> " + siguiente.getCodigo() + "\n";
+			
+			
+		}
+		else if(siguiente == null) {
+			
+			message = anterior.getNombre() + " <-- " + " Nombre: " + nombre
+			+ " --> " +  "__"
+			+ " / " + anterior.getCodigo() + " <-- " + " Codigo: " + codigo
+			+ " --> " +  "__" + "\n";
+			
+			
+		}
 	
 		
-		return  anterior.getNombre() + " <-- " + " Nombre: " + nombre
-				+ " --> " + siguiente.getNombre()
-				+ " / " + anterior.getCodigo() + " <-- " + " Codigo: " + codigo
-				+ " --> " + siguiente.getCodigo() + "\n";
-				
+		return message; 
 	} 	
 	
 

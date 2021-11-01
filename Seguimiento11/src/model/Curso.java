@@ -99,30 +99,7 @@ public class Curso {
 	}
 
 
-	public String addEstudiante(Estudiante nuevoEstudiante) {
-
-		totalEstudiantes++;
-		String mensaje = "Estudiante agregado \n";
-
-		if(primerEstudiante==null){
-
-			primerEstudiante=nuevoEstudiante;
-			ultimoEstudiante=primerEstudiante;
-			primerEstudiante.setSiguiente(ultimoEstudiante);
-			ultimoEstudiante.setAnterior(primerEstudiante);
-
-		} else {
-
-			nuevoEstudiante.setSiguiente(primerEstudiante);
-			primerEstudiante.setAnterior(nuevoEstudiante);
-			nuevoEstudiante.setAnterior(ultimoEstudiante);
-			ultimoEstudiante.setSiguiente(nuevoEstudiante);
-			primerEstudiante=nuevoEstudiante;
-		}
-		return mensaje;
-
-	}	
-
+	
 	public String addEstudianteOrdenamiento(Estudiante nuevoEstudiante){
 
 		String mensaje = "Estudiante agregado \n";
@@ -131,54 +108,64 @@ public class Curso {
 		if(primerEstudiante==null){
 
 			primerEstudiante=nuevoEstudiante;
-			ultimoEstudiante=primerEstudiante;
-			primerEstudiante.setSiguiente(ultimoEstudiante);
-			ultimoEstudiante.setAnterior(primerEstudiante);
+		
 
-		} else if(primerEstudiante == ultimoEstudiante) {
+		} else if(primerEstudiante.getSiguiente() == null) {
 
 			primerEstudiante.setSiguiente(nuevoEstudiante);
 			nuevoEstudiante.setAnterior(primerEstudiante);
 			ultimoEstudiante=nuevoEstudiante;
-			ultimoEstudiante.setSiguiente(primerEstudiante);
-			primerEstudiante.setAnterior(ultimoEstudiante);
-
+			
 
 		} else {
 
-			ultimoEstudiante.setSiguiente(nuevoEstudiante);
 			nuevoEstudiante.setAnterior(ultimoEstudiante);
-			ultimoEstudiante=nuevoEstudiante;
-			ultimoEstudiante.setSiguiente(primerEstudiante);
-			primerEstudiante.setAnterior(ultimoEstudiante);
-
+			ultimoEstudiante.setSiguiente(nuevoEstudiante);
+			ultimoEstudiante = nuevoEstudiante;
 
 		}
 
 		return mensaje; 
 
 	}
+	
+	public String addEstudiante(Estudiante nuevoEstudiante) {
+
+		totalEstudiantes++;
+		String mensaje = "Estudiante agregado \n";
+
+		if(primerEstudiante==null){
+
+			primerEstudiante=nuevoEstudiante;
+			
+		} else {
+
+			nuevoEstudiante.setSiguiente(primerEstudiante);
+			primerEstudiante.setAnterior(nuevoEstudiante);
+			primerEstudiante=nuevoEstudiante;
+		}
+		return mensaje;
+
+	}
+	
 
 	public String pintarEstudiante() {
 
 
-		String codigo = "";
 		String mensaje = "";
 
 
-		if(primerEstudiante != null && ultimoEstudiante != null){
+		if(primerEstudiante != null){
 
 			Estudiante temporal = primerEstudiante; 
 
-			while(!codigo.equalsIgnoreCase(ultimoEstudiante.getCodigo())) {
+			for(int i = 0; i < totalEstudiantes && temporal != null; i++ ) {
 
 				mensaje += temporal.toString();
 				temporal = temporal.getSiguiente();
-				codigo = temporal.getCodigo();
+				
 
 			}
-
-			mensaje += temporal.toString();
 
 		} else {
 
@@ -190,107 +177,88 @@ public class Curso {
 
 	}
 
-	// primero 1
-	// ultimo 4
-
-	//actual 1
-	// ultimo 4
-
-	// 4 <- 1 -> <- 5 -> <- 7 -> <- 6 -> <- 4 -> 1
-
-
+	
 	public int eliminarEstudiante(String nombre) {
 
-		Estudiante actual = new Estudiante("","");
-		Estudiante anterior = new Estudiante("","");
+		Estudiante actual = primerEstudiante;
+		Estudiante auxiliar = primerEstudiante.getSiguiente();
 
-		int count = 0; 
-	
-		actual = primerEstudiante;
-		anterior = ultimoEstudiante;
+		int count = 0;
 		
-	
-		if(primerEstudiante != null) {
-			do {
-				if(actual.getNombre().equalsIgnoreCase(nombre)) { // compara el valor del dato actual con el buscado
 
-					if(actual == primerEstudiante){
+		if(primerEstudiante != null) {
+			
+			while(actual != null) {
+				
+				if(actual.getNombre().equalsIgnoreCase(nombre)){
+					
+					if(actual == primerEstudiante) {
 						
-						if(primerEstudiante == ultimoEstudiante) {
+						if(auxiliar == null) {
 							
 							primerEstudiante = null; 
-							ultimoEstudiante = null; 
-							
-							count++;
 							totalEstudiantes--;
-						
-						}
-						 else {
+							count++;
 							
-							 
-						primerEstudiante = primerEstudiante.getSiguiente();
-						ultimoEstudiante.setSiguiente(primerEstudiante); 
-						primerEstudiante.setAnterior(ultimoEstudiante);
+		
+							
+						} else {
+							
+							primerEstudiante = actual.getSiguiente();
+							auxiliar = primerEstudiante.getSiguiente();				
+							primerEstudiante.setAnterior(null);
+							totalEstudiantes--;
+							count++;
+							
+			
+						}
 						
+					} else if(actual == ultimoEstudiante){
+						
+						ultimoEstudiante = actual.getAnterior();
+						ultimoEstudiante.setSiguiente(null);
 						count++;
 						totalEstudiantes--;
-						
-							
-						}
-						
-					} else if (actual == ultimoEstudiante){
-
-						ultimoEstudiante = anterior;
-						primerEstudiante.setAnterior(ultimoEstudiante);
-						ultimoEstudiante.setSiguiente(primerEstudiante);
-
-//						ultimoEstudiante.setSiguiente(primerEstudiante);
-//						primerEstudiante.setAnterior(ultimoEstudiante);
-						
-						
-						count++;
-						totalEstudiantes--;
-						
-
-					} else{
 						
 						
 				
-						anterior.setSiguiente(actual.getSiguiente());
-						actual.getSiguiente().setAnterior(anterior);;
-						System.out.println(actual);
 						
+					} else {
 						
-						if(count != 0) {
-							
-							anterior.setSiguiente(actual.getSiguiente());
-							actual.getSiguiente().setAnterior(anterior);;
-							
-							System.out.println("n");
-						}
+						actual = actual.getAnterior();
+						auxiliar = auxiliar.getAnterior();
 						
-						
+						actual.setSiguiente(auxiliar.getSiguiente());
+						auxiliar.getSiguiente().setAnterior(actual);
+						auxiliar = auxiliar.getSiguiente();
 						
 						count++;
 						totalEstudiantes--;
+						
+					
 						
 					}
-
+					
 				}
-
-				anterior = actual; //referencia del anterior al que vas a eliminar 
+				
 				actual = actual.getSiguiente();
 				
-
-			}  while(actual != primerEstudiante && primerEstudiante != null);
+				if(auxiliar.getSiguiente() != null) {
+					
+					
+				
+					
+					auxiliar = auxiliar.getSiguiente();
+				}
+				
+			}			
+			
 		}
-
-	
-
-		return count; 
-
-
+		
+		return count;
+			
 	}
+	
 	
 	
 

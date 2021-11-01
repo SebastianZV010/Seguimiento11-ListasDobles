@@ -79,12 +79,6 @@ public class Main {
 				borrarElemento();
 				menu();
 				break;
-				
-			case 5: 
-				prueba();
-				menu();
-				break;
-
 
 			case 0:
 				System.out.println("\n END OF PROGRAM \n");
@@ -134,27 +128,6 @@ public class Main {
 		System.out.println("\n Cantidad de estudiantes eliminados: " + curso.eliminarEstudiante(nombre) + "\n");
 	}
 	
-	public void prueba() {
-		
-		Estudiante e1 = new Estudiante("1","Sebastian");
-		Estudiante e2 = new Estudiante("2","GarbanzoFurioso");
-		Estudiante e3 = new Estudiante("3","GarbanzoFurioso");
-		Estudiante e4 = new Estudiante("4","Kremer");
-		
-		
-//		curso.addEstudiante(e1);
-//		curso.addEstudiante(e2);
-//		curso.addEstudiante(e3);
-		
-		curso.addEstudianteOrdenamiento(e1);
-		curso.addEstudianteOrdenamiento(e2);
-		curso.addEstudianteOrdenamiento(e3);
-		curso.addEstudianteOrdenamiento(e4);
-
-		System.out.println(curso.pintarEstudiante());
-		
-	}
-
 
 }
 
