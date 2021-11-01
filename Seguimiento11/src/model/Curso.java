@@ -159,112 +159,6 @@ public class Curso {
 
 	}
 
-
-
-	public boolean eliminarEstudiantes(String nombre) {
-
-		Estudiante actual;
-		boolean encontrado = false;
-		actual = ultimoEstudiante;
-
-		if(primerEstudiante != null){
-			while(actual.getSiguiente() != ultimoEstudiante && !encontrado) {
-
-				encontrado=(actual.getSiguiente().getNombre().equals(nombre));
-				System.out.println(encontrado);
-				if(!encontrado) {
-					actual = actual.getSiguiente();
-
-					System.out.println("1");
-
-				}
-
-			}
-
-			System.out.println("2");
-			System.out.println(encontrado);
-			encontrado=(actual.getSiguiente().getNombre().equals(nombre));
-			System.out.println(encontrado);
-
-			if(encontrado){
-
-				System.out.println("3");
-				Estudiante aux = actual.getSiguiente();
-				if(ultimoEstudiante == ultimoEstudiante.getSiguiente()) {
-
-					ultimoEstudiante=null; 
-					System.out.println("4");
-
-				} else {
-
-					if(aux == ultimoEstudiante) {
-						ultimoEstudiante=actual;
-						System.out.println("5");
-					}
-					actual.setSiguiente(aux.getSiguiente());
-					System.out.println("6");
-				}
-
-				System.out.println("7");
-				aux=null; 
-			}
-		} 
-
-		return encontrado==true;
-	}
-
-	//	public boolean eliminarEstudiantesCopy(String nombre) {
-	//		
-	//		Estudiante actual;
-	//		boolean encontrado = false;
-	//		actual = primerEstudiante;
-	//		
-	//		if(primerEstudiante != null && ultimoEstudiante != null){
-	//			while(actual.getSiguiente() != ultimoEstudiante && !encontrado) {
-	//				
-	//				encontrado=(actual.getSiguiente().getNombre().equals(nombre));
-	//				System.out.println(encontrado);
-	//				if(!encontrado) {
-	//					actual = actual.getSiguiente();
-	//					
-	//					System.out.println("1");
-	//					
-	//				}
-	//				
-	//			}
-	//			
-	//			System.out.println("2");
-	//			System.out.println(encontrado);
-	//			encontrado=(actual.getSiguiente().getNombre().equals(nombre));
-	//			System.out.println(encontrado);
-	//			
-	//			if(encontrado){
-	//				
-	//				System.out.println("3");
-	//				Estudiante aux = actual.getSiguiente();
-	//				if(primeroEstudiante == primerEstudiante.getSiguiente()) {
-	//					
-	//					ultimoEstudiante=null; 
-	//					System.out.println("4");
-	//					
-	//				} else {
-	//					
-	//					if(aux == ultimoEstudiante) {
-	//						ultimoEstudiante=actual;
-	//						System.out.println("5");
-	//					}
-	//					actual.setSiguiente(aux.getSiguiente());
-	//					System.out.println("6");
-	//				}
-	//				
-	//				System.out.println("7");
-	//				aux=null; 
-	//			}
-	//		} 
-	//		
-	//		return encontrado==true;
-	//	}
-
 	public String pintarEstudiante() {
 
 
@@ -305,68 +199,100 @@ public class Curso {
 	// 4 <- 1 -> <- 5 -> <- 7 -> <- 6 -> <- 4 -> 1
 
 
-	public String borrarEstudianteNuevaForm(String nombre) {
+	public int eliminarEstudiante(String nombre) {
 
 		Estudiante actual = new Estudiante("","");
 		Estudiante anterior = new Estudiante("","");
 
-		String mensaje = ""; 
-		boolean existe = false;
+		int count = 0; 
+	
 		actual = primerEstudiante;
 		anterior = ultimoEstudiante;
-
+		
+	
 		if(primerEstudiante != null) {
 			do {
 				if(actual.getNombre().equalsIgnoreCase(nombre)) { // compara el valor del dato actual con el buscado
 
 					if(actual == primerEstudiante){
-						// 4 <- 1 -> <- 5 -> <- 7 -> <- 6 -> <- 4 -> 1
+						
+						if(primerEstudiante == ultimoEstudiante) {
+							
+							primerEstudiante = null; 
+							ultimoEstudiante = null; 
+							
+							count++;
+							totalEstudiantes--;
+						
+						}
+						 else {
+							
+							 
 						primerEstudiante = primerEstudiante.getSiguiente();
 						ultimoEstudiante.setSiguiente(primerEstudiante); 
 						primerEstudiante.setAnterior(ultimoEstudiante);
-						//ultimoEstudiante.getSiguiente() = primerEstudiante;
-
-						mensaje = "El estudiante " + nombre + " ha sido borrado";
-						existe = true;
-
-
-
+						
+						count++;
+						totalEstudiantes--;
+						
+							
+						}
+						
 					} else if (actual == ultimoEstudiante){
 
 						ultimoEstudiante = anterior;
 						primerEstudiante.setAnterior(ultimoEstudiante);
 						ultimoEstudiante.setSiguiente(primerEstudiante);
 
-						mensaje = "El estudiante " + nombre + " ha sido borrado";
-						existe = true;
+//						ultimoEstudiante.setSiguiente(primerEstudiante);
+//						primerEstudiante.setAnterior(ultimoEstudiante);
+						
+						
+						count++;
+						totalEstudiantes--;
+						
 
 					} else{
-
-						// 4 <- 1 -> <- 5 -> <- 7 -> <- 6 -> <- 4 -> 1
+						
+						
+				
 						anterior.setSiguiente(actual.getSiguiente());
 						actual.getSiguiente().setAnterior(anterior);;
-
-						mensaje = "El estudiante " + nombre + " ha sido borrado";
-						existe = true;
-
+						System.out.println(actual);
+						
+						
+						if(count != 0) {
+							
+							anterior.setSiguiente(actual.getSiguiente());
+							actual.getSiguiente().setAnterior(anterior);;
+							
+							System.out.println("n");
+						}
+						
+						
+						
+						count++;
+						totalEstudiantes--;
+						
 					}
 
 				}
 
 				anterior = actual; //referencia del anterior al que vas a eliminar 
 				actual = actual.getSiguiente();
+				
 
-			}  while(actual != primerEstudiante);
+			}  while(actual != primerEstudiante && primerEstudiante != null);
 		}
 
-		if (existe == false) {
-			mensaje = "El estudiante " + nombre +" no existe"; 
-		}
+	
 
-		return mensaje; 
+		return count; 
 
 
 	}
+	
+	
 
 	public void pintarAtrasAdelanteEstudiantes(){
 

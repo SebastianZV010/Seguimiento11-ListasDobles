@@ -76,7 +76,7 @@ public class Main {
 				break;
 				
 			case 4:
-				borrarElementoC();
+				borrarElemento();
 				menu();
 				break;
 				
@@ -121,42 +121,26 @@ public class Main {
 
 
 	}
+
 	
 	public void borrarElemento() {
 		
-		boolean eliminado = false;
+		
 		
 		System.out.println("Ingrese el nombre del estudiante que quiera eliminar");
 		String nombre = sc.nextLine();
 		
-		eliminado = curso.eliminarEstudiantes(nombre);
-		
-		System.out.println(eliminado);
-		
-		if(eliminado == true){
-			System.out.println("Se ha eliminado el estudiante: " + nombre);
-		} else {
-			System.out.println("El estudiante " + nombre + " no se hace parte del curso");
-		}
-		//curso.eliminarEstudiantes(nombre);
-	}
 	
-	public void borrarElementoC() {
-		
-		
-		
-		System.out.println("Ingrese el nombre del estudiante que quiera eliminar");
-		String nombre = sc.nextLine();
-		
-		System.out.println(curso.borrarEstudianteNuevaForm(nombre));
+		System.out.println("\n Cantidad de estudiantes eliminados: " + curso.eliminarEstudiante(nombre) + "\n");
 	}
 	
 	public void prueba() {
 		
 		Estudiante e1 = new Estudiante("1","Sebastian");
-		Estudiante e3 = new Estudiante("2","GarbanzoFurioso");
-		Estudiante e2 = new Estudiante("3","Kremer");
-		Estudiante e4 = new Estudiante("4","GarbanzoFurioso");
+		Estudiante e2 = new Estudiante("2","GarbanzoFurioso");
+		Estudiante e3 = new Estudiante("3","GarbanzoFurioso");
+		Estudiante e4 = new Estudiante("4","Kremer");
+		
 		
 //		curso.addEstudiante(e1);
 //		curso.addEstudiante(e2);
